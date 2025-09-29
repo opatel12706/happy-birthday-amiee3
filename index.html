@@ -1,0 +1,110 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday Amiee 💖</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Arial", sans-serif;
+      background: linear-gradient(135deg, #ffafbd, #ffc3a0);
+      color: #fff;
+      text-align: center;
+      overflow-x: hidden;
+    }
+    h1 {
+      font-size: 3em;
+      margin-top: 50px;
+      animation: fadeIn 3s ease-in-out;
+    }
+    .message {
+      font-size: 1.5em;
+      margin: 30px auto;
+      width: 80%;
+      line-height: 1.6;
+      animation: fadeIn 4s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .slideshow {
+      margin: 30px auto;
+      max-width: 500px;
+      position: relative;
+    }
+    .slideshow img {
+      width: 100%;
+      border-radius: 15px;
+      display: none;
+    }
+    .slideshow img.active {
+      display: block;
+    }
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+  </style>
+</head>
+<body>
+  <h1>Happy Birthday, Amiee! 🎂💖</h1>
+  <p class="message">
+    To the most amazing girl in my life, you make every day brighter.  
+    Today is all about celebrating you. I’m so grateful for your love, your smile, and everything that makes you, *you*.  
+    Here’s to many more birthdays together 💕
+  </p>
+
+  <div class="slideshow">
+    <img src="https://placekitten.com/500/300" class="active">
+    <img src="https://placekitten.com/501/300">
+    <img src="https://placekitten.com/502/300">
+  </div>
+
+  <script>
+    // Confetti 🎉
+    const canvas = document.createElement("canvas");
+    document.body.appendChild(canvas);
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const ctx = canvas.getContext("2d");
+    const confetti = Array.from({ length: 200 }).map(() => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 6 + 4,
+      dx: Math.random() - 0.5,
+      dy: Math.random() * 3 + 2,
+      color: `hsl(${Math.random() * 360}, 100%, 50%)`
+    }));
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      confetti.forEach(c => {
+        ctx.beginPath();
+        ctx.arc(c.x, c.y, c.r, 0, Math.PI * 2);
+        ctx.fillStyle = c.color;
+        ctx.fill();
+        c.x += c.dx;
+        c.y += c.dy;
+        if (c.y > canvas.height) c.y = -10;
+      });
+      requestAnimationFrame(draw);
+    }
+    draw();
+
+    // Slideshow 📸
+    let current = 0;
+    const images = document.querySelectorAll(".slideshow img");
+    setInterval(() => {
+      images[current].classList.remove("active");
+      current = (current + 1) % images.length;
+      images[current].classList.add("active");
+    }, 3000);
+  </script>
+</body>
+</html>
+```
